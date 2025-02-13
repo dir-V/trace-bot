@@ -1,0 +1,2 @@
+# trace-bot
+discord bot
