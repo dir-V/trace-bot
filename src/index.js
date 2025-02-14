@@ -1,4 +1,4 @@
-const { Client, GatewayIntentBits } = require("discord.js");
+const { Client, GatewayIntentBits, ActivityType } = require("discord.js");
 const { google } = require("googleapis");
 const dotenv = require("dotenv");
 const { authenticate } = require("@google-cloud/local-auth");
@@ -14,6 +14,8 @@ const CHANNEL_ID = process.env.CHANNEL_ID;
 // Discord bot setup
 const client = new Client({
     intents: [
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.MessageContent,
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildScheduledEvents,
     ],
@@ -184,6 +186,14 @@ client.on("guildScheduledEventDelete", async (event) => {
     const auth = await authorize();
     await deleteCalendarEvent(event, auth);
 });
+
+client.on("ready", () => {
+    client.user.setActivity({
+        name: "THE SPINE",
+        type: ActivityType.Watching
+    })
+});
+
 
 // Login the bot
 client.login(DISCORD_TOKEN);
