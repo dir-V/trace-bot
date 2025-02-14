@@ -189,7 +189,7 @@ client.on("guildScheduledEventDelete", async (event) => {
 
 client.on("ready", () => {
     client.user.setActivity({
-        name: "THE SPINE",
+        name: "The Spine",
         type: ActivityType.Watching
     })
 });
